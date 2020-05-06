@@ -27,6 +27,14 @@ const db = knex({
 });
 
 
+const register = require('./controllers/register')
+const signin = require('./controllers/signin')
+
+app.post('/signin', (req, res) => { signin.handleSignin(req, res, db, bcrypt) })
+
+app.post('/register', (req, res) => { register.handleRegister(req, res, db, bcrypt) })
+
+
 
 app.listen(3001, () => {
     console.log('app is running on port 3001')
