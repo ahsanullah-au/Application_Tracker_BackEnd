@@ -1,18 +1,17 @@
 const handleRegister = (req, res, db, bcrypt) => {
 
-    const { email, password, name } = req.body;
-
-    if (!email || !name || !password) {
-        return res.status(400).json('Incorrect Submission')
+    
+    if (!req.body.email || !req.body.name || !req.body.password) {
+        return res.status(400).json('Missing Info')
     }
 
     else {
-        const hash = bcrypt.hashSync(password);
+        const hash = bcrypt.hashSync(req.body.password);
 
         db.transaction(trx => {
             trx.insert({
                 hash: hash,
-                email: email
+                email: req.body.email
             })
                 .into('login')
                 .returning('email')
@@ -20,7 +19,7 @@ const handleRegister = (req, res, db, bcrypt) => {
                     return trx('users')
                         .returning('*')
                         .insert({
-                            firstname: name,
+                            firstname: req.body.name,
                             email: loginEmail[0]
                         }).then(response => {
                             res.json(response[0])

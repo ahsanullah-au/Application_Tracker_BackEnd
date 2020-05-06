@@ -1,7 +1,7 @@
 const handleSignin = (req, res, db, bcrypt) => {
 
     if (!req.body.email ||!req.body.password) {
-        return res.status(400).json('Incorrect Submission')
+        return res.status(400).json('Missing Info')
     }
     else {
         db.select('email', 'hash').from('login')
