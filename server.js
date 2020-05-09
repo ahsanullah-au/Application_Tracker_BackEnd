@@ -35,13 +35,16 @@ app.post('/signin', (req, res) => { signin.handleSignin(req, res, db, bcrypt) })
 
 app.post('/register', (req, res) => { register.handleRegister(req, res, db, bcrypt) })
 
-app.get('/applications', (req, res => applications.handleGetApplications(req, res, db) ))
 
-app.post('/applications', (req, res => applications.handleAddApplication(req, res, db) ))
+//Following functions are for job applications
 
-app.put('/applications', (req, res => applications.handleUpdateApplication(req, res, db) ))
+app.get('/applications', (req, res) => { applications.handleGetApplications(req, res, db) })
 
-app.delete('/applications', (req, res => applications.handleDeleteApplication(req, res, db) ))
+app.post('/applications', (req, res) => { applications.handleAddApplication(req, res, db) })
+
+app.put('/applications', (req, res) => { applications.handleUpdateApplication(req, res, db) })
+
+app.delete('/applications', (req, res) => { applications.handleDeleteApplication(req, res, db) })
 
 
 app.listen(3001, () => {
