@@ -23,17 +23,25 @@ const db = knex({
         database: config.database
     }
 
-    
+
 });
 
 
-const register = require('./controllers/register')
-const signin = require('./controllers/signin')
+const register = require('./controllers/register');
+const signin = require('./controllers/signin');
+const applications = require('./controllers/applications');
 
 app.post('/signin', (req, res) => { signin.handleSignin(req, res, db, bcrypt) })
 
 app.post('/register', (req, res) => { register.handleRegister(req, res, db, bcrypt) })
 
+app.get('/applications', (req, res => applications.handleGetApplications(req, res, db) ))
+
+app.post('/applications', (req, res => applications.handleAddApplication(req, res, db) ))
+
+app.put('/applications', (req, res => applications.handleUpdateApplication(req, res, db) ))
+
+app.delete('/applications', (req, res => applications.handleDeleteApplication(req, res, db) ))
 
 
 app.listen(3001, () => {
