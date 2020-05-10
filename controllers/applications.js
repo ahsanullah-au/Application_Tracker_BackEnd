@@ -64,7 +64,17 @@ const handleUpdateApplication = (req, res, db) => {
 }
 
 const handleDeleteApplication = (req, res, db) => {
-
+    if (!req.body.appID) {
+        return res.status(400).json('Missing Info')
+    }
+    else{
+        return db('applicationsv1')
+            .returning('*')
+            .where('appid', req.body.appID)
+            .del()
+            .then(response => res.json(response[0]))
+            .catch(err => res.status(400).json(err))
+    }
 }
 
 
