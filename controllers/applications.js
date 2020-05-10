@@ -6,7 +6,9 @@ const handleAddApplication = (req, res, db) => {
     else {
         const tempAppNotes = (req.body.appNotes? req.body.appNotes: " ");
         
-        db('applicationsv1').insert({
+        return db('applicationsv1')
+        .returning('*')
+        .insert({
             userid : req.body.userID,
             appcompany : req.body.appCompany,
             approle : req.body.appRole,
@@ -23,6 +25,15 @@ const handleAddApplication = (req, res, db) => {
 }
 
 const handleGetApplications = (req, res, db) => {
+    if (!req.body.userID){
+        return res.status(400).json('Missing Info')
+    }
+    else{
+        return db('applicationsv1')
+        .where('userid',req.body.userID)
+        .then(response => res.json(response))
+        .catch(err => res.status(400).json(err))
+    }
 
 }
 
