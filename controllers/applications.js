@@ -25,12 +25,26 @@ const handleAddApplication = (req, res, db) => {
 }
 
 const handleGetApplications = (req, res, db) => {
-    if (!req.body.userID) {
+    const { userID } = req.params
+    if (!userID) {
         return res.status(400).json('Missing Info')
     }
     else {
         return db('applicationsv1')
-            .where('userid', req.body.userID)
+            .select({
+
+                appID: "appid",
+                userID: "userid",
+                appCompany: "appcompany",
+                appRole: "approle",
+                appLocation: "applocation",
+                appDate: "appdate",
+                appResponse: "appresponse",
+                appLink: "applink",
+                appNotes: "appnotes"
+
+            })
+            .where('userid', parseInt(userID))
             .then(response => res.json(response))
             .catch(err => res.status(400).json(err))
     }
@@ -67,7 +81,7 @@ const handleDeleteApplication = (req, res, db) => {
     if (!req.body.appID) {
         return res.status(400).json('Missing Info')
     }
-    else{
+    else {
         return db('applicationsv1')
             .returning('*')
             .where('appid', req.body.appID)

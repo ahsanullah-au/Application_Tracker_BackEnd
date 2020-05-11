@@ -38,7 +38,7 @@ app.post('/register', (req, res) => { register.handleRegister(req, res, db, bcry
 
 //Following functions are for job applications
 
-app.get('/applications', (req, res) => { applications.handleGetApplications(req, res, db) })
+app.get('/applications/:userID', (req, res) => { applications.handleGetApplications(req, res, db) })
 
 app.post('/applications', (req, res) => { applications.handleAddApplication(req, res, db) })
 
