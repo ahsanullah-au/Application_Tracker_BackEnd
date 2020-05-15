@@ -1,10 +1,11 @@
 const handleAddApplication = (req, res, db) => {
 
-    if (!req.body.userID || !req.body.appCompany || !req.body.appRole || !req.body.appLocation || !req.body.appDate || !req.body.appResponse || !req.body.appLink) {
+    if (!req.body.userID || !req.body.appCompany || !req.body.appRole || !req.body.appLocation || !req.body.appDate || !req.body.appResponse ) {
         return res.status(400).json('Missing Info')
     }
     else {
         const tempAppNotes = (req.body.appNotes ? req.body.appNotes : " ");
+        const tempAppLink = (req.body.appLink ? req.body.appLink : " ")
 
         return db('applicationsv1')
             .returning('*')
@@ -15,7 +16,7 @@ const handleAddApplication = (req, res, db) => {
                 applocation: req.body.appLocation,
                 appdate: req.body.appDate,
                 appresponse: req.body.appResponse,
-                applink: req.body.appLink,
+                applink: tempAppLink,
                 appnotes: tempAppNotes
             })
             .then(response => res.json(response[0]))
