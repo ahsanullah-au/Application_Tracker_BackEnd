@@ -47,6 +47,16 @@ app.put('/applications', (req, res) => { applications.handleUpdateApplication(re
 app.delete('/applications', (req, res) => { applications.handleDeleteApplication(req, res, db) })
 
 
+
+const scraper = require('./controllers/scraper');
+
+const rp = require('request-promise');
+const HTMLParser = require('node-html-parser');
+
+
+app.post('/scraper', (req, res) => { scraper.handleScraper(req, res, rp, fs, HTMLParser) })
+
+
 app.listen(3001, () => {
     console.log('app is running on port 3001')
 })
