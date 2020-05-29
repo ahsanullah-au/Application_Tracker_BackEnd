@@ -2,7 +2,7 @@ const rp = require('request-promise');
 const HTMLParser = require('node-html-parser');
 const fs = require('fs')
 
-const url = "https://www.linkedin.com/jobs/view/1881352475"
+const url = "https://www.linkedin.com/jobs/view/1862422355"
 
 const options ={
     uri: url,
@@ -19,9 +19,12 @@ const linkedinScraper = () => {
 
     rp(options)
     .then(resp=>{
-        fs.writeFileSync(__dirname + "/tmp/html4.html", resp)
-        const htmlResponse = HTMLParser.parse(resp).firstChild
-        console.log(htmlResponse)
+        //fs.writeFileSync(__dirname + "/tmp/html4.html", resp)
+        const htmlResponse = HTMLParser.parse(resp).querySelector(".sub-nav-cta__text-container").firstChild.text
+        console.log(HTMLParser.parse(resp).querySelector(".sub-nav-cta__header").text)
+        console.log(HTMLParser.parse(resp).querySelector(".sub-nav-cta__sub-text-container").firstChild.text)
+        console.log(HTMLParser.parse(resp).querySelector(".sub-nav-cta__sub-text-container").lastChild.text)
+        console.log(url)
     })
     .catch(err => console.log(err))
         
