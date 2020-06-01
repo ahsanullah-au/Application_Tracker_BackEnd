@@ -38,26 +38,26 @@ const register = require('./register');
 const signin = require('./signin');
 const applications = require('./applications');
 
-app.post('/signin', (req, res) => { signin.handleSignin(req, res, db, bcrypt); });
+app.post('/signin', (req:Express.Request, res:Express.Response) => { signin.handleSignin(req, res, db, bcrypt); });
 
-app.post('/register', (req, res) => { register.handleRegister(req, res, db, bcrypt); });
+app.post('/register', (req:Express.Request, res:Express.Response) => { register.handleRegister(req, res, db, bcrypt); });
 
 
 // Following functions are for job applications
 
-app.get('/applications/:userID', (req, res) => { applications.handleGetApplications(req, res, db); });
+app.get('/applications/:userID', (req:Express.Request, res:Express.Response) => { applications.handleGetApplications(req, res, db); });
 
-app.post('/applications', (req, res) => { applications.handleAddApplication(req, res, db); });
+app.post('/applications', (req:Express.Request, res:Express.Response) => { applications.handleAddApplication(req, res, db); });
 
-app.put('/applications', (req, res) => { applications.handleUpdateApplication(req, res, db); });
+app.put('/applications', (req:Express.Request, res:Express.Response) => { applications.handleUpdateApplication(req, res, db); });
 
-app.delete('/applications', (req, res) => { applications.handleDeleteApplication(req, res, db); });
+app.delete('/applications', (req:Express.Request, res:Express.Response) => { applications.handleDeleteApplication(req, res, db); });
 
 
 const scraper = require('./scraper');
 
 
-app.post('/scraper', (req, res) => { scraper.handleScraper(req, res, rp, fs, HTMLParser); });
+app.post('/scraper', (req:Express.Request, res:Express.Response) => { scraper.handleScraper(req, res, rp, HTMLParser); });
 
 
 app.listen(3001, () => {
