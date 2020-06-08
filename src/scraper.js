@@ -1,4 +1,4 @@
-const handleScraper = (req, res, rp, fs, HTMLParser) => {
+const handleScraper = (req, res, rp, HTMLParser) => {
   if (req.body.site === 'Indeed') {
     rp(req.body.URL)
       .then((resp) => {
