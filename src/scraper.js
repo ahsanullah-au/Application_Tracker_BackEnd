@@ -11,12 +11,12 @@ const handleScraper = (req, res, rp, HTMLParser) => {
         });
       })
       .then((indeedJob) => res.json(indeedJob))
-      .catch((err) => res.status(400).json('Could not find URL'));
+      .catch((err) => res.status(400).json('Could not scrape Indeed URL'));
   } else if (req.body.site === 'LinkedIn') {
     const options = {
       uri: req.body.URL,
       headers: {
-        accept: 'text/html',
+        'accept': 'text/html',
         'accept-encoding': 'br',
         'accept-language': 'en-US,en;q=0.8,ms;q=0.6',
         'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36',
@@ -35,7 +35,7 @@ const handleScraper = (req, res, rp, HTMLParser) => {
         return (jobFields);
       })
       .then((linkedinJob) => res.json(linkedinJob))
-      .catch((err) => res.status(400).json('Could not find URL'));
+      .catch((err) => res.status(400).json('Could not scrape LinkedIn URL'));
   }
 };
 
