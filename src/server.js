@@ -56,8 +56,11 @@ app.delete('/applications', (req, res) => { applications.handleDeleteApplication
 
 const scraper = require('./scraper');
 
-
 app.post('/scraper', (req, res) => { scraper.handleScraper(req, res, rp, HTMLParser); });
+
+const docStorage = require('./docStorage');
+
+app.post('/docStorage', (req, res) => { docStorage.handleDocStorage(req, res); });
 
 
 app.listen(3001, () => {
