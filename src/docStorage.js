@@ -14,8 +14,7 @@ const handleDocStorage = (req, res) => {
     const s3 = new aws.S3({
         'signatureVersion':'v4'
     });  // Create a new instance of S3
-    //const fileURL = hash(req.body.user + req.body.fileName);
-    const fileURL = req.body.fileName;
+    const fileURL = hash(req.body.user + req.body.fileName) + "." + req.body.fileType;
  
     // Set up the payload of what we are sending to the S3 api
     const s3Params = {
@@ -23,7 +22,7 @@ const handleDocStorage = (req, res) => {
         Key: fileURL,
         Expires: 500,
         ContentType: "application/octet-stream",
-        ACL: 'private'
+        ACL: 'public-read'
     }
 
     s3.getSignedUrl('putObject', s3Params, (err, url) => {
@@ -34,6 +33,7 @@ const handleDocStorage = (req, res) => {
         else{
             const returnData = {
                 signedRequest: url,
+                fileName: fileURL,
                 returnURL: `https://${config.Bucket}.s3.amazonaws.com/${fileURL}`
             } 
 
