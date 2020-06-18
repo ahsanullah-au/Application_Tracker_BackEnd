@@ -11,7 +11,9 @@ aws.config.update({
 })
 
 const handleDocStorage = (req, res) => {
-    const s3 = new aws.S3();  // Create a new instance of S3
+    const s3 = new aws.S3({
+        'signatureVersion':'v4'
+    });  // Create a new instance of S3
     //const fileURL = hash(req.body.user + req.body.fileName);
     const fileURL = req.body.fileName;
  
@@ -20,8 +22,8 @@ const handleDocStorage = (req, res) => {
         Bucket: config.Bucket,
         Key: fileURL,
         Expires: 500,
-        ContentType: req.body.fileType,
-        ACL: 'public-read'
+        ContentType: "application/octet-stream",
+        ACL: 'private'
     }
 
     s3.getSignedUrl('putObject', s3Params, (err, url) => {
