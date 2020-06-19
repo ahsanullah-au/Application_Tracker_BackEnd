@@ -36,7 +36,6 @@ const HTMLParser = require('node-html-parser');
 
 const register = require('./register');
 const signin = require('./signin');
-const applications = require('./applications');
 
 app.post('/signin', (req, res) => { signin.handleSignin(req, res, db, bcrypt); });
 
@@ -44,6 +43,8 @@ app.post('/register', (req, res) => { register.handleRegister(req, res, db, bcry
 
 
 // Following functions are for job applications
+
+const applications = require('./applications');
 
 app.get('/applications/:userID', (req, res) => { applications.handleGetApplications(req, res, db); });
 
@@ -58,9 +59,23 @@ const scraper = require('./scraper');
 
 app.post('/scraper', (req, res) => { scraper.handleScraper(req, res, rp, HTMLParser); });
 
+
+// Following functions are for documents: getting presigned URL to upload to AWS S3, storing the retrieval info in DB
+
 const docStorage = require('./docStorage');
 
 app.post('/docStorage', (req, res) => { docStorage.handleDocStorage(req, res); });
+
+const docAccess = require('./docAccess');
+
+app.get('/docAccess/:userID', (req, res) => { applications.handleGetDocs(req, res, db); });
+
+app.post('/docAccess', (req, res) => { applications.handleAddDoc(req, res, db); });
+
+app.put('/docAccess', (req, res) => { applications.handleUpdateDoc(req, res, db); });
+
+app.delete('/docAccess', (req, res) => { applications.handleDeleteDoc(req, res, db); });
+
 
 
 app.listen(3001, () => {
