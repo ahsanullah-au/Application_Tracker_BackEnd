@@ -68,13 +68,13 @@ app.post('/docStorage', (req, res) => { docStorage.handleDocStorage(req, res); }
 
 const docAccess = require('./docAccess');
 
-app.get('/docAccess/:userID', (req, res) => { applications.handleGetDocs(req, res, db); });
+app.get('/docAccess/:userID', (req, res) => { docAccess.handleGetDocs(req, res, db); });
 
-app.post('/docAccess', (req, res) => { applications.handleAddDoc(req, res, db); });
+app.post('/docAccess', (req, res) => { docAccess.handleAddDoc(req, res, db); });
 
-app.put('/docAccess', (req, res) => { applications.handleUpdateDoc(req, res, db); });
+app.put('/docAccess', (req, res) => { docAccess.handleUpdateDoc(req, res, db); });
 
-app.delete('/docAccess', (req, res) => { applications.handleDeleteDoc(req, res, db); });
+app.delete('/docAccess', (req, res) => { docAccess.handleDeleteDoc(req, res, db); });
 
 
 
