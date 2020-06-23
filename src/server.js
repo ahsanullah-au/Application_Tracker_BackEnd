@@ -64,7 +64,9 @@ app.post('/scraper', (req, res) => { scraper.handleScraper(req, res, rp, HTMLPar
 
 const docStorage = require('./docStorage');
 
-app.post('/docStorage', (req, res) => { docStorage.handleDocStorage(req, res); });
+app.post('/docStorage', (req, res) => { docStorage.handleAWSDocAddition(req, res); });
+
+app.delete('/docStorage', (req, res) => { docStorage.handleAWSDocDeletion(req, res); });
 
 const docAccess = require('./docAccess');
 
