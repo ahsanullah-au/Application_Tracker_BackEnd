@@ -72,11 +72,10 @@ const handleGetLinkedDocs = (req, res, db) => {
 
     return db("applicationsv1")
         .select({
-            appID: 'appid',
             linkedDocs: "linkeddocs"
         })
         .where("appid", parseInt(appID, 10))
-        .then((response) => res.json(response[0]))
+        .then((response) => res.json(response[0].linkedDocs))
         .catch((err) => res.status(400).json(err));
 
 }
