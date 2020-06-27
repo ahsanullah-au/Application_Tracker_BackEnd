@@ -63,10 +63,24 @@ const handleDeleteDoc = (req, res, db) => {
         .catch((err) => res.status(400).json(err));
 };
 
+const handleLinkDoc = (req, res, db) => {
+    if (!req.body.appID) {
+        return res.status(400).json("Missing Info")
+    }    
+
+    return db("applicationsv1")
+        .returning("*")
+        .where("appid", req.body.appID)
+        .update({ "linkeddocs": req.body.docArray })
+        .then((response) => res.json(response[0]))
+        .catch((err) => res.status(400).json(err));
+}
+
 
 module.exports = {
     handleAddDoc,
     handleGetDocs,
     handleUpdateDoc,
     handleDeleteDoc,
+    handleLinkDoc,
 };

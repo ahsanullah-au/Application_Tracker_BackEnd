@@ -78,6 +78,8 @@ app.put('/docAccess', (req, res) => { docAccess.handleUpdateDoc(req, res, db); }
 
 app.delete('/docAccess', (req, res) => { docAccess.handleDeleteDoc(req, res, db); });
 
+app.put('/docLink', (req, res) => { docAccess.handleLinkDoc(req, res, db); });
+
 
 
 app.listen(3001, () => {
