@@ -63,10 +63,29 @@ const handleDeleteDoc = (req, res, db) => {
         .catch((err) => res.status(400).json(err));
 };
 
-const handleLinkDoc = (req, res, db) => {
+const handleGetLinkedDocs = (req, res, db) => {
+    const { appID } = req.params;
+    
+    if (!appID) {
+        return res.status(400).json("Missing Info")
+    }
+
+    return db("applicationsv1")
+        .select({
+            appID: 'appid',
+            linkedDocs: "linkeddocs"
+        })
+        .where("appid", parseInt(appID, 10))
+        .then((response) => res.json(response[0]))
+        .catch((err) => res.status(400).json(err));
+
+}
+
+
+const handleUpdateLinkDoc = (req, res, db) => {
     if (!req.body.appID) {
         return res.status(400).json("Missing Info")
-    }    
+    }
 
     return db("applicationsv1")
         .returning("*")
@@ -82,5 +101,6 @@ module.exports = {
     handleGetDocs,
     handleUpdateDoc,
     handleDeleteDoc,
-    handleLinkDoc,
+    handleUpdateLinkDoc,
+    handleGetLinkedDocs,
 };

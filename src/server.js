@@ -78,7 +78,9 @@ app.put('/docAccess', (req, res) => { docAccess.handleUpdateDoc(req, res, db); }
 
 app.delete('/docAccess', (req, res) => { docAccess.handleDeleteDoc(req, res, db); });
 
-app.put('/docLink', (req, res) => { docAccess.handleLinkDoc(req, res, db); });
+app.get('/docLink/:appID', (req, res) => { docAccess.handleGetLinkedDocs(req, res, db); });
+
+app.put('/docLink', (req, res) => { docAccess.handleUpdateLinkDoc(req, res, db); });
 
 
 
