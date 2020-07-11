@@ -1,3 +1,7 @@
+//Scrapes Indeed and LinkedIn URLs to return Job info from HTML
+//LinkedIn is inconsistent so it has been removed from front end.
+//Indeed only works for Apply Now postings
+
 const handleScraper = (req, res, rp, HTMLParser) => {
   if (req.body.site === 'Indeed') {
     rp(req.body.URL)
@@ -43,6 +47,3 @@ module.exports = {
   handleScraper,
 };
 
-
-// let url = "https://ca.indeed.com/viewjob?jk=e7fd7b4781a9ebc2&tk=1e9eebcgc4ouu800&from=serp&vjs=3&advn=6114451463185775&adid=196595498&sjdu=XuMSTO2lVbIQBVQc5QpEYbP5n_-s08hrxMD-dtpZk1kZUApBFh4bKDvm7LdYQCE42rEk1z1jvfUYyBKDz740wBUGplM10pGaORioW3mZaM2CcPUpqIpeYedZh5I4mDxMcNBoGZC3UaGLRyjmtX1Ys8Y5n05Y-_DiB1f4S4gQMbI"
-// Doesnt work for out of indeed apply, stored in html3 file

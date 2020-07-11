@@ -1,3 +1,7 @@
+//This handles all document storage in DB
+//Document records are stores in DB while the actual docs uploaded to S3
+//Simple functions that add/delete and get docs
+
 const handleAddDoc = (req, res, db) => {
     if (!req.body.userID || !req.body.fileName || !req.body.fileURL) {
         return res.status(400).json('Missing Info');

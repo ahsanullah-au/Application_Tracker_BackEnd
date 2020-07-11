@@ -1,27 +1,31 @@
+//This handles all generation of presigned URL in AWS
+//Also handles deletion of uploaded docs
+
 const aws = require('aws-sdk');
 const fs = require('fs');
 const hash = require('object-hash')
 
 const config = JSON.parse(fs.readFileSync('awsAccess.json'));
 
+//Stored in file for security
 aws.config.update({
     region: 'us-east-2',
     accessKeyId: config.AWSAccessKeyId,
     secretAccessKey: config.AWSSecretKey
 })
 
+//Returns presigned URL, hashes filename+userID for more security and to avoid collisions
 const handleAWSDocAddition = (req, res) => {
     const s3 = new aws.S3({
         'signatureVersion': 'v4'
-    });  // Create a new instance of S3
+    });  
     const fileURL = hash(req.body.user + req.body.fileName) + "." + req.body.fileType;
 
-    // Set up the payload of what we are sending to the S3 api
     const s3Params = {
         Bucket: config.Bucket,
         Key: fileURL,
         Expires: 500,
-        ContentType: "application/octet-stream",
+        ContentType: "application/octet-stream",//Allows various types
         ACL: 'public-read'
     }
 
@@ -42,28 +46,28 @@ const handleAWSDocAddition = (req, res) => {
     })
 }
 
-const handleAWSDocDeletion = (req,res) => {
+//Deletes from S3 Bucket
+const handleAWSDocDeletion = (req, res) => {
     const s3 = new aws.S3({
         'signatureVersion': 'v4'
-    });  // Create a new instance of S3
-    const fileKey = req.body.URL.substring(req.body.URL.lastIndexOf('/')+1);
+    });  
+    const fileKey = req.body.URL.substring(req.body.URL.lastIndexOf('/') + 1);
 
-    // Set up the payload of what we are sending to the S3 api
     const s3Params = {
         Bucket: config.Bucket,
-        Key: fileKey        
+        Key: fileKey
     }
 
     s3.deleteObject(s3Params, (err, data) => {
-        if (err){
+        if (err) {
             console.log(err);
             return res.status(400).JSON("Error")
         }
-        else{
+        else {
             return res.json("Successful Delete")
         }
-      });
-    
+    });
+
 }
 
 module.exports = {

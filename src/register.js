@@ -1,3 +1,7 @@
+//Handles registering of users
+//Hashes password and stores in DB
+//Uses transaction to ensure both user and login info are stored in respective tables
+
 const handleRegister = (req, res, db, bcrypt) => {
   if (!req.body.email || !req.body.lastname || !req.body.firstname || !req.body.password) {
     return res.status(400).json('Missing Info');

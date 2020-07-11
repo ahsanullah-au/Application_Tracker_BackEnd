@@ -1,3 +1,6 @@
+//Handles signing in of users
+//Hashes password and checks against hash
+
 const handleSignin = (req, res, db, bcrypt) => {
   if (!req.body.email || !req.body.password) {
     return res.status(400).json('Missing Info');

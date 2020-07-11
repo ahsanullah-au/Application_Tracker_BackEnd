@@ -10,13 +10,13 @@ const cors = require('cors');
 
 app.use(cors());
 
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs'); //For Hashing
 
 const fs = require('fs');
 
 const config = JSON.parse(fs.readFileSync('configDBAhsan.json'));
 
-const knex = require('knex');
+const knex = require('knex'); //For DB Access
 
 const db = knex({
   client: 'pg',
@@ -60,13 +60,17 @@ const scraper = require('./scraper');
 app.post('/scraper', (req, res) => { scraper.handleScraper(req, res, rp, HTMLParser); });
 
 
-// Following functions are for documents: getting presigned URL to upload to AWS S3, storing the retrieval info in DB
+// Following functions are for documents: 
+
+// Getting presigned URL to upload to AWS S3 and deletion from S3
 
 const docStorage = require('./docStorage');
 
 app.post('/docStorage', (req, res) => { docStorage.handleAWSDocAddition(req, res); });
 
 app.delete('/docStorage', (req, res) => { docStorage.handleAWSDocDeletion(req, res); });
+
+//Storing,Deleting the record in DB and access to the records
 
 const docAccess = require('./docAccess');
 

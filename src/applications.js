@@ -1,3 +1,7 @@
+//This handles all functions related to Applications
+//Gets, Adds, Modifies and Deletes
+//Each function is a simple write or get from DB using Knex
+
 const handleAddApplication = (req, res, db) => {
   if (!req.body.userID || !req.body.appCompany || !req.body.appRole || !req.body.appLocation || !req.body.appDate || !req.body.appResponse) {
     return res.status(400).json('Missing Info');
