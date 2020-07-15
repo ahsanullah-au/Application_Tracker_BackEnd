@@ -3,6 +3,6 @@
 # dependencies
 /node_modules
 /src/tmp
-/configDBAhsan.json
-/awsAccess.json
+#/configDBAhsan.json
+#/awsAccess.json
 /NotesForScraping
