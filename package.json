@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "pretest": "eslint --ignore-path .gitignore .",
-    "start": "nodemon ./src/server.js",
+    "NDstart": "nodemon ./src/server.js",
+    "start": "node ./src/server.js",
     "tsStart": "nodemon -w ./src/**/*.ts -e ts-node ./src/server.ts"
   },
   "author": "",
