@@ -14,15 +14,15 @@ const bcrypt = require('bcryptjs'); //For Hashing
 
 const fs = require('fs');
 
-//const config = JSON.parse(fs.readFileSync('configDBAhsan.json'));
+//const config = JSON.parse(fs.readFileSync('configDBAhsan.json')); //Not in hosted
 
 const knex = require('knex'); //For DB Access
 
 const db = knex({
   client: 'pg',
   connection: {
-    connectionString: process.env.DATABASE_URL,
-    ssl: true
+    connectionString: process.env.DATABASE_URL, //Only in local
+    ssl: false //Only in Local
     //host: config.host,
     //user: config.user,
     //password: config.password,
