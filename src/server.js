@@ -14,17 +14,19 @@ const bcrypt = require('bcryptjs'); //For Hashing
 
 const fs = require('fs');
 
-const config = JSON.parse(fs.readFileSync('configDBAhsan.json'));
+//const config = JSON.parse(fs.readFileSync('configDBAhsan.json'));
 
 const knex = require('knex'); //For DB Access
 
 const db = knex({
   client: 'pg',
   connection: {
-    host: config.host,
-    user: config.user,
-    password: config.password,
-    database: config.database,
+    host: process.env.DATABASE_URL,
+    ssl: true
+    //host: config.host,
+    //user: config.user,
+    //password: config.password,
+    //database: config.database,
   },
 
 
