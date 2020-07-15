@@ -21,7 +21,7 @@ const knex = require('knex'); //For DB Access
 const db = knex({
   client: 'pg',
   connection: {
-    host: process.env.DATABASE_URL,
+    connectionString: process.env.DATABASE_URL,
     ssl: true
     //host: config.host,
     //user: config.user,
