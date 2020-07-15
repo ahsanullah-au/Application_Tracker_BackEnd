@@ -86,6 +86,8 @@ app.get('/docLink/:appID', (req, res) => { docAccess.handleGetLinkedDocs(req, re
 
 app.put('/docLink', (req, res) => { docAccess.handleUpdateLinkDoc(req, res, db); });
 
+app.get('/', (req, res) => {res.send('App is running')})
+
 
 
 app.listen(process.env.PORT || 3000, () => {
