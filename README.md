@@ -1,6 +1,8 @@
 # Application_Tracker_BackEnd
 
-Back End of a webapp that helps you keep track of your job applications. Uses Node and Express on the backend. Connects to a PostgreSQL database using Knex.
+Back End of a Web Application that helps you keep track of your job applications and relevant documents for each application 
+
+Uses Node and Express on the backend. Connects to a PostgreSQL database.
 
 # Features:
 
@@ -14,4 +16,3 @@ Back End of a webapp that helps you keep track of your job applications. Uses No
 # Upcoming:
 
 * Maps integration that returns distances from addresses requested.
-* Fix of LinkedIn parsing or change into a API based solution due to inconsistency
